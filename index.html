@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>推しボイス</title>
+</head>
+<body>
+  <h2>推しボイスを再生中…</h2>
+  <audio id="voice" autoplay></audio>
+  <script>
+    const hour = new Date().getHours();
+    let file = "";
+
+    if (hour < 12) {
+      file = "ohayou.mp3";
+    } else if (hour < 18) {
+      file = "konnichiwa.mp3";
+    } else {
+      file = "oyasumi.mp3";
+    }
+
+    document.getElementById("voice").src = "./voices/" + file;
+  </script>
+</body>
+</html>
