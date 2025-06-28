@@ -5,8 +5,9 @@
   <title>推しボイス</title>
 </head>
 <body>
-  <h2>推しボイスを再生中…</h2>
-  <audio id="voice" autoplay></audio>
+  <h2>推しボイス（再生ボタンを押してね）</h2>
+  <audio id="voice" controls></audio>
+
   <script>
     const hour = new Date().getHours();
     let file = "";
