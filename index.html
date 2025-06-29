@@ -1,27 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>推しボイス ランダム再生</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oshi Voice</title>
 </head>
 <body>
-  <h2>推しボイス（時間帯ごとにランダム再生）</h2>
+  <h1 id="greeting">推しからのメッセージ</h1>
+  <img id="oshiImage" src="" alt="Oshi Image" width="300"/>
   <audio id="voice" controls autoplay></audio>
 
   <script>
     const hour = new Date().getHours();
-    let options = [];
+    let timeOfDay;
 
-    if (hour < 12) {
-      options = ["ohayou1.mp3", "ohayou2.mp3", "ohayou3.mp3"];
-    } else if (hour < 18) {
-      options = ["konnichiwa1.mp3", "konnichiwa2.mp3", "konnichiwa3.mp3"];
+    if (hour >= 7 && hour < 10) {
+      timeOfDay = "morning";
+    } else if (hour >= 10 && hour < 14) {
+      timeOfDay = "noon";
+    } else if (hour >= 14 && hour < 18) {
+      timeOfDay = "afternoon";
+    } else if (hour >= 18 && hour < 22) {
+      timeOfDay = "evening";
+    } else if ((hour >= 23 && hour <= 23) || (hour >= 0 && hour < 4)) {
+      timeOfDay = "midnight";
     } else {
-      options = ["oyasumi1.mp3", "oyasumi2.mp3", "oyasumi3.mp3"];
+      timeOfDay = "earlymorning";
     }
 
-    const file = options[Math.floor(Math.random() * options.length)];
-    document.getElementById("voice").src = "./voices/" + file;
+    const voices = {
+      morning: ["voice/morning1.mp3", "voice/morning2.mp3", "voice/morning3.mp3"],
+      noon: ["voice/noon1.mp3", "voice/noon2.mp3", "voice/noon3.mp3"],
+      afternoon: ["voice/afternoon1.mp3", "voice/afternoon2.mp3", "voice/afternoon3.mp3"],
+      evening: ["voice/evening1.mp3", "voice/evening2.mp3", "voice/evening3.mp3"],
+      midnight: ["voice/midnight1.mp3", "voice/midnight2.mp3", "voice/midnight3.mp3"],
+      earlymorning: ["voice/earlymorning1.mp3", "voice/earlymorning2.mp3", "voice/earlymorning3.mp3"]
+    };
+
+    const images = {
+      morning: ["img/morning1.jpg", "img/morning2.jpg", "img/morning3.jpg"],
+      noon: ["img/noon1.jpg", "img/noon2.jpg", "img/noon3.jpg"],
+      afternoon: ["img/afternoon1.jpg", "img/afternoon2.jpg", "img/afternoon3.jpg"],
+      evening: ["img/evening1.jpg", "img/evening2.jpg", "img/evening3.jpg"],
+      midnight: ["img/midnight1.jpg", "img/midnight2.jpg", "img/midnight3.jpg"],
+      earlymorning: ["img/earlymorning1.jpg", "img/earlymorning2.jpg", "img/earlymorning3.jpg"]
+    };
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    document.getElementById("voice").src = getRandomItem(voices[timeOfDay]);
+    document.getElementById("oshiImage").src = getRandomItem(images[timeOfDay]);
   </script>
 </body>
 </html>
